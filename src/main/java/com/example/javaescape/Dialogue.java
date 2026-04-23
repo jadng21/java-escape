@@ -19,6 +19,7 @@ public class Dialogue {
         return texte;
     }
 
+
     public String getImagePath() {
         return imagePath;
     }
