@@ -5,19 +5,19 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Vbox;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 
 public class DialogueUI {
-    private Vbox vuePrincipale;
+    private VBox vuePrincipale;
     private Label labelNom;
     private Label labelTexte;
     private ImageView imagePersonnage;
     private Timeline timeline;
 
     public DialogueUI() {
-       vuePrincipale = new Vbox(10);
+       vuePrincipale = new VBox(10);
        labelNom = new Label ();
        labelNom.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
 
@@ -25,14 +25,14 @@ public class DialogueUI {
        labelTexte.setWrapText(true);
 
        imagePersonnage = new ImageView();
-       imagePersonnage.setHeight(200);
+       imagePersonnage.setFitHeight(200);
        imagePersonnage.setPreserveRatio(true);
 
        vuePrincipale.getChildren().addAll(imagePersonnage, labelNom, labelTexte);
     }
 
     public void printDialogue(Dialogue dialogue) {
-        labelNom.setTexte(dialogue.getPersonnage());
+        labelNom.setText(dialogue.getPersonnage());
 
         try {
             Image img = new Image(getClass().getResourceAsStream(dialogue.getImagePath()));

@@ -23,7 +23,7 @@ public class MenuController {
         DialogueUI dialogueUI = new DialogueUI();
 
         if(dialogueController.aDesDialoguesSuivants()) {
-            dialogueUI.afficherDialogue(dialogueController.getDialogueSuivant());
+            dialogueUI.printDialogue(dialogueController.getDialogueSuivant());
         }
 
         Node source = (Node) event.getSource();
@@ -35,7 +35,7 @@ public class MenuController {
         sceneActuelle.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE) {
                 if (dialogueController.aDesDialoguesSuivants()) {
-                    dialogueUI.afficherDialogue(dialogueController.getDialogueSuivant());
+                    dialogueUI.printDialogue(dialogueController.getDialogueSuivant());
                 } else {
                     System.out.println("Fin de l'intro ! Passage au jeu du binôme...");
                 }

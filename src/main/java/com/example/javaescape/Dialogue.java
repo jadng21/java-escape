@@ -6,7 +6,7 @@ public class Dialogue {
     private String imagePath;
 
     public Dialogue ( String personnage, String texte, String imagePath) {
-        this.personnage = personage;
+        this.personnage = personnage;
         this.texte = texte;
         this.imagePath = imagePath;
     }
