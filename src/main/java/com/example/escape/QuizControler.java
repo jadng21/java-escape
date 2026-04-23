@@ -16,8 +16,8 @@ public class QuizControler {
         this.correct_answer_num = 0;
     }
 
-    public boolean loadAnswer(int num, String difficulty)throws IOException, InterruptedException {
-    org.json.JSONArray QuestionJson = QuizApi.GetQuestions(num, difficulty);
+    public boolean loadAnswer(int num, String category,int difficulty)throws IOException, InterruptedException {
+    org.json.JSONArray QuestionJson = QuizApi.GetQuestions(num, difficulty, category);
 
     if (QuestionJson == null || QuestionJson.length() == 0) {
         return false;
@@ -56,7 +56,7 @@ public class QuizControler {
     public static int getScoreMin() {
         return SCORE_MIN;
     }
-    public static int getTotalQuestions() {
+    public int getTotalQuestions() {
         return question.size();
     }
 
