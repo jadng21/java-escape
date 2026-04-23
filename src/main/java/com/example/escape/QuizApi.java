@@ -78,39 +78,4 @@ public class QuizApi {
                 .replace("&lt;", "<")
                 .replace("&gt;", ">");
     }
-
-    public static void main(String[] args) {
-        try {
-            QuizApi api = new QuizApi();
-
-            System.out.println("\n========== TEST 1: UNE SEULE QUESTION ==========");
-            JSONObject question = api.GetOneQuestion("easy");
-
-            if (question != null) {
-                System.out.println("Catégorie: " + question.getString("category"));
-                System.out.println("Question: " + decodeHtml(question.getString("question")));
-                System.out.println("Difficulté: " + question.getString("difficulty"));
-                System.out.println("Réponse correcte: " + decodeHtml(question.getString("correct_answer")));
-            } else {
-                System.out.println("[ERREUR] Impossible de récupérer la question");
-            }
-
-            System.out.println("\n========== TEST 2: PLUSIEURS QUESTIONS ==========");
-            JSONArray questions = api.GetQuestions(5, 9, "medium");
-
-            if (questions != null) {
-                System.out.println("Nombre de questions: " + questions.length());
-                for (int i = 0; i < questions.length(); i++) {
-                    JSONObject q = questions.getJSONObject(i);
-                    System.out.println((i + 1) + ". " + decodeHtml(q.getString("question")));
-                }
-            } else {
-                System.out.println("[ERREUR] Impossible de récupérer les questions");
-            }
-
-        } catch (IOException | InterruptedException e) {
-            System.err.println("[ERREUR] Exception lors de l'appel API:");
-            e.printStackTrace();
-        }
-    }
 }
