@@ -1,8 +1,6 @@
 package com.example.escape;
 
-import com.example.escape.QuizApi;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Collections;
 import java.util.List;
