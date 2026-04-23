@@ -5,70 +5,55 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class QuizControler {
-    private List<Question> question;
+    private List<Question> questions;
     private int correct_answer_num = 0;
     private int correct_answer_index = 0;
     private static final int SCORE_MIN = 5;
 
     public QuizControler() {
-        this.question = new ArrayList<>();
+        this.questions = new ArrayList<>();
         this.correct_answer_index = 0;
         this.correct_answer_num = 0;
     }
 
-    public boolean loadAnswer(int num, String category,int difficulty)throws IOException, InterruptedException {
-    org.json.JSONArray QuestionJson = QuizApi.GetQuestions(num, difficulty, category);
+    public boolean loadAnswer(int num, int category, String difficulty) throws IOException, InterruptedException {
+        org.json.JSONArray QuestionJson = QuizApi.GetQuestions(num, category, difficulty);
 
-    if (QuestionJson == null || QuestionJson.length() == 0) {
-        return false;
-    }
-    for (int i = 0; i < QuestionJson.length(); i++) {
-        question.add(new Question(QuestionJson.getJSONObject(i)));
-    }
-    return true;
+        if (QuestionJson == null || QuestionJson.length() == 0) {
+            return false;
+        }
+        for (int i = 0; i < QuestionJson.length(); i++) {
+            questions.add(new Question(QuestionJson.getJSONObject(i)));
+        }
+        return true;
     }
 
-    public Question getCorrectAnswer() {
-        if (correct_answer_index < question.size()) {
-            return question.get(correct_answer_index);
+    public Question getCurrentQuestion() {
+        if (correct_answer_index < questions.size()) {
+            return questions.get(correct_answer_index);
         }
         return null;
     }
-    public boolean checkCorrectAnswer(String answer) {
-        Question question = getCorrectAnswer();
-        if (question == null) return false;
 
-        boolean IsCorrect = question.verifAnswer(answer);
-        if (IsCorrect) {
+    public boolean checkCorrectAnswer(String answer) {
+        Question current = getCurrentQuestion();
+        if (current == null) return false;
+
+        boolean isCorrect = current.verifAnswer(answer);
+        if (isCorrect) {
             correct_answer_num++;
         }
         correct_answer_index++;
-        return IsCorrect;
-    }
-    public boolean minScore() {
-        return correct_answer_num >= SCORE_MIN;
-    }
-
-    public boolean nextQuestion() {
-        return correct_answer_index < question.size();
-    }
-
-    public static int getScoreMin() {
-        return SCORE_MIN;
-    }
-    public int getTotalQuestions() {
-        return question.size();
+        return isCorrect;
     }
 
     public int getCorrect_answer_num() {
         return correct_answer_num;
     }
 
-
-
-    public void reinit(){
+    public void reinit() {
         correct_answer_index = 0;
         correct_answer_num = 0;
-        question.clear();
+        questions.clear();
     }
 }
