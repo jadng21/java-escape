@@ -18,6 +18,10 @@ public class DialogueUI {
 
     public DialogueUI() {
        vuePrincipale = new VBox(10);
+
+       String css = getClass().getResource("style.css").toExternalForm();
+       vuePrincipale.getStylesheets().add(css);
+
        labelNom = new Label ();
        labelNom.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
 
